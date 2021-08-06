@@ -113,5 +113,37 @@ describe("e2e tests", function () {
         });
       }
     });
+
+    describe("advanced TypeScript sample project", function () {
+      useFixture("advanced-ts-sample-project");
+
+      before(function () {
+        shell.exec(`${hardhatBinary}`, {
+          env: {
+            ...process.env,
+            HARDHAT_CREATE_ADVANCED_TYPESCRIPT_SAMPLE_PROJECT_WITH_DEFAULTS: "true",
+          },
+        });
+      });
+
+      for (const suggestedCommand of [
+        // This list should be kept reasonably in sync with
+        // hardhat-core/sample-projects/advanced-ts/README.txt
+        `${hardhatBinary} compile`,
+        `${hardhatBinary} test`,
+        "node scripts/sample-script.js",
+        "REPORT_GAS=true npx hardhat test",
+        `${hardhatBinary} coverage`,
+        "npx eslint '**/*.{ts,js}'",
+        "npx eslint '**/*.{ts,js}' --fix",
+        "npx prettier '**/*.{json,sol,md}' --check",
+        "npx solhint 'contracts/**/*.sol'",
+        "npx solhint 'contracts/**/*.sol' --fix",
+      ]) {
+        it(`should permit successful execution of the suggested command "${suggestedCommand}"`, async function () {
+          shell.exec(suggestedCommand);
+        });
+      }
+    });
   });
 });
