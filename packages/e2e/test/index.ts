@@ -118,7 +118,7 @@ describe("e2e tests", function () {
       useFixture("advanced-ts-sample-project");
 
       before(function () {
-        shell.exec(`${hardhatBinary}`, {
+        shell.exec(`${hardhatBinary} --show-stack-traces`, {
           env: {
             ...process.env,
             HARDHAT_CREATE_ADVANCED_TYPESCRIPT_SAMPLE_PROJECT_WITH_DEFAULTS: "true",
