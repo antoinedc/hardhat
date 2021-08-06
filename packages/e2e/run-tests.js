@@ -29,7 +29,7 @@ async function main() {
 
   // we don't throw if the tests fail so that we can cleanup things properly
   shell.set("+e");
-  const mochaResult = shell.exec(`mocha --recursive \"test/**/*.ts\"`);
+  const mochaResult = shell.exec(`mocha --recursive \"test/**/*.ts\" --grep \"advanced TypeScript sample project\"`);
   shell.set("-e");
 
   cleanup(fixtures);
